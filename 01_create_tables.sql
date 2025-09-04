@@ -1,51 +1,49 @@
+CREATE TABLE STUDENT (
+  matricula INTEGER PRIMARY KEY,
+  name VARCHAR(50) NOT NULL
+);
 
-    CREATE TABLE alumnos (
-        matricula VARCHAR(20) PRIMARY KEY,
-        nombre VARCHAR(100) NOT NULL
-    );
+CREATE TABLE TEACHER(
+  id_teacher SERIAL PRIMARY KEY, 
+  name VARCHAR(50) NOT NULL, 
+  matricula VARCHAR(50) NOT NULL, 
+  departamento VARCHAR(50) NOT NULL 
+);
 
-    CREATE TABLE maestros (
-        id_maestro SERIAL PRIMARY KEY,
-        nombre VARCHAR(100) NOT NULL
-    );
+CREATE TABLE COURSE(
+  periodo VARCHAR(10) NOT NULL, 
+  clave VARCHAR(10) NOT NULL, 
+  name VARCHAR(50) NOT NULL, 
+  horario VARCHAR(10) NOT NULL, 
+  id_teacher INTEGER NOT NULL, 
+  PRIMARY KEY (periodo, clave), 
+  FOREIGN KEY (id_teacher) REFERENCES TEACHER(id_teacher) 
+    ON DELETE RESTRICT                
+    ON UPDATE CASCADE
+); 
 
-    CREATE TABLE grupos (
-        periodo VARCHAR(10) NOT NULL,
-        seccion VARCHAR(10) NOT NULL,
-        nombre_grupo VARCHAR(50) NOT NULL,
-        id_maestro INTEGER NOT NULL,
-        PRIMARY KEY (periodo, seccion),
-        FOREIGN KEY (id_maestro) REFERENCES maestros(id_maestro)
-            ON DELETE RESTRICT
-            ON UPDATE CASCADE
-    );
+CREATE TABLE INSCRIPCION (
+  id_inscripcion SERIAL PRIMARY KEY, 
+  id_student INTEGER NOT NULL, 
+  periodo VARCHAR(10) NOT NULL, 
+  clave VARCHAR(10) NOT NULL, 
+  FOREIGN KEY (id_student) REFERENCES STUDENT(matricula)
+    ON DELETE CASCADE       
+    ON UPDATE CASCADE, 
+  FOREIGN KEY (periodo, clave) REFERENCES COURSE(periodo, clave)
+    ON DELETE CASCADE       
+    ON UPDATE CASCADE
+); 
 
-    CREATE TABLE inscripciones (
-        matricula VARCHAR(20) NOT NULL,
-        periodo VARCHAR(10) NOT NULL,
-        seccion VARCHAR(10) NOT NULL,
-        fecha_inscripcion DATE NOT NULL,
-        FOREIGN KEY (matricula) REFERENCES alumnos(matricula)
-            ON DELETE CASCADE
-            ON UPDATE CASCADE,
-        FOREIGN KEY (periodo, seccion) REFERENCES grupos(periodo, seccion)
-            ON DELETE CASCADE
-            ON UPDATE CASCADE,
-        PRIMARY KEY (matricula, periodo, seccion)
-    );
+CREATE TABLE ASISTENCIA (
+  id_asistencia SERIAL PRIMARY KEY, 
+  matricula INTEGER NOT NULL, 
+  asistencia TIMESTAMP, 
+  periodo VARCHAR(10) NOT NULL, 
+  clave VARCHAR(10) NOT NULL,
+  FOREIGN KEY (periodo, clave) REFERENCES COURSE(periodo, clave)
+    ON DELETE CASCADE       
+    ON UPDATE CASCADE
+); 
 
-    CREATE TABLE asistencia (
-        matricula VARCHAR(20) NOT NULL,
-        periodo VARCHAR(10) NOT NULL,
-        seccion VARCHAR(10) NOT NULL,
-        fecha_hora TIMESTAMP NOT NULL,
-        presente BOOLEAN NOT NULL,
-        FOREIGN KEY (matricula) REFERENCES alumnos(matricula)
-            ON DELETE CASCADE
-            ON UPDATE CASCADE,
-        FOREIGN KEY (periodo, seccion) REFERENCES grupos(periodo, seccion)
-            ON DELETE CASCADE
-            ON UPDATE CASCADE,
-        PRIMARY KEY (matricula, periodo, seccion, fecha_hora)
-    );
-    
+
