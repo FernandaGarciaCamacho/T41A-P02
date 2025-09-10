@@ -33,13 +33,13 @@ def test_grupos_insertados(db_connection):
 
 def test_inscripciones_insertados(db_connection):
     with db_connection.cursor() as cur:
-        cur.execute("SELECT COUNT(*) FROM inscripcion;")
+        cur.execute("SELECT COUNT(*) FROM INSCRIPCION;")
         count = cur.fetchone()[0]
         assert count == 10  
 
 def test_asistencia_insertados(db_connection):
     with db_connection.cursor() as cur:
-        cur.execute("SELECT COUNT(*) FROM asistencia;")
+        cur.execute("SELECT COUNT(*) FROM ASISTENCIA;")
         count = cur.fetchone()[0]
         assert count == 10  
 
@@ -48,11 +48,11 @@ def test_structure(db_connection):
             SELECT tablename FROM pg_tables 
             WHERE tablename 
             IN ('STUDENT', 'TEACHER', 'COURSE',
-            'inscripcion', 'asistencia');
+            'INSCRIPCION', 'ASISTENCIA');
           '''
     expected_tables = {'STUDENT', 'TEACHER',
-                       'COURSE', 'inscripcion',
-                       'asistencia'}
+                       'COURSE', 'INSCRIPCION',
+                       'ASISTENCIA'}
     with db_connection.cursor() as cur:
         cur.execute(sql)
         result_tables = {row[0] for row in cur.fetchall()}
