@@ -11,10 +11,10 @@ CREATE TABLE TEACHER(
 );
 
 CREATE TABLE COURSE(
-  periodo VARCHAR(10) NOT NULL, 
-  clave VARCHAR(10) NOT NULL, 
+  periodo VARCHAR(20) NOT NULL, 
+  clave VARCHAR(20) NOT NULL, 
   name VARCHAR(50) NOT NULL, 
-  horario VARCHAR(10) NOT NULL, 
+  horario VARCHAR(20) NOT NULL, 
   id_teacher INTEGER NOT NULL, 
   PRIMARY KEY (periodo, clave), 
   FOREIGN KEY (id_teacher) REFERENCES TEACHER(id_teacher) 
@@ -25,8 +25,8 @@ CREATE TABLE COURSE(
 CREATE TABLE INSCRIPCION (
   id_inscripcion SERIAL PRIMARY KEY, 
   id_student INTEGER NOT NULL, 
-  periodo VARCHAR(10) NOT NULL, 
-  clave VARCHAR(10) NOT NULL, 
+  periodo VARCHAR(20) NOT NULL, 
+  clave VARCHAR(20) NOT NULL, 
   FOREIGN KEY (id_student) REFERENCES STUDENT(matricula)
     ON DELETE CASCADE       
     ON UPDATE CASCADE, 
@@ -39,11 +39,9 @@ CREATE TABLE ASISTENCIA (
   id_asistencia SERIAL PRIMARY KEY, 
   matricula INTEGER NOT NULL, 
   asistencia TIMESTAMP, 
-  periodo VARCHAR(10) NOT NULL, 
-  clave VARCHAR(10) NOT NULL,
+  periodo VARCHAR(20) NOT NULL, 
+  clave VARCHAR(20) NOT NULL,
   FOREIGN KEY (periodo, clave) REFERENCES COURSE(periodo, clave)
     ON DELETE CASCADE       
     ON UPDATE CASCADE
 ); 
-
-
