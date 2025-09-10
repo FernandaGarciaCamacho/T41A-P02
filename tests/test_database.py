@@ -15,25 +15,25 @@ def db_connection():
 
 def test_alumnos_insertados(db_connection):
     with db_connection.cursor() as cur:
-        cur.execute("SELECT COUNT(*) FROM alumnos;")
+        cur.execute("SELECT COUNT(*) FROM STUDENT;")
         count = cur.fetchone()[0]
         assert count == 10
 
 def test_maestros_insertados(db_connection):
     with db_connection.cursor() as cur:
-        cur.execute("SELECT COUNT(*) FROM maestros;")
+        cur.execute("SELECT COUNT(*) FROM TEACHER;")
         count = cur.fetchone()[0]
         assert count == 10
 
 def test_grupos_insertados(db_connection):
     with db_connection.cursor() as cur:
-        cur.execute("SELECT COUNT(*) FROM grupos;")
+        cur.execute("SELECT COUNT(*) FROM COURSE;")
         count = cur.fetchone()[0]
         assert count == 10
 
 def test_inscripciones_insertados(db_connection):
     with db_connection.cursor() as cur:
-        cur.execute("SELECT COUNT(*) FROM inscripciones;")
+        cur.execute("SELECT COUNT(*) FROM inscripcion;")
         count = cur.fetchone()[0]
         assert count == 10  
 
@@ -47,11 +47,11 @@ def test_structure(db_connection):
     sql = ''' 
             SELECT tablename FROM pg_tables 
             WHERE tablename 
-            IN ('alumnos', 'maestros', 'grupos',
-            'inscripciones', 'asistencia');
+            IN ('STUDENT', 'TEACHER', 'COURSE',
+            'inscripcion', 'asistencia');
           '''
-    expected_tables = {'alumnos', 'maestros',
-                       'grupos', 'inscripciones',
+    expected_tables = {'STUDENT', 'TEACHER',
+                       'COURSE', 'inscripcion',
                        'asistencia'}
     with db_connection.cursor() as cur:
         cur.execute(sql)
