@@ -37,7 +37,7 @@
     ('20253S', 'T45B', 'PostgreSQL','7:00-8:00', 10);
 
     -- Inscripciones
-    INSERT INTO inscripcion (id_student, periodo, clave) VALUES
+    INSERT INTO INSCRIPCION (id_student, periodo, clave) VALUES
     ('1001', '20253S', 'T41A'),
     ('1002', '20253S', 'T41A'),
     ('1003', '20253S', 'S38A'),
@@ -49,7 +49,7 @@
     ('1009', '20253S', 'S38E'),
     ('1010', '20253S', 'T48A');
 
-INSERT INTO asistencia ( matricula, asistencia, periodo, clave) VALUES
+INSERT INTO ASISTENCIA ( matricula, asistencia, periodo, clave) VALUES
     ('1001', '2025-09-01 08:00:00', '20253S', 'T41A'),
     ('1002', '2025-09-01 08:00:00', '20253S', 'T41B'),
     ('1004', '2025-09-01 10:00:00','20253S', 'T41B'),
@@ -58,7 +58,7 @@ INSERT INTO asistencia ( matricula, asistencia, periodo, clave) VALUES
     ('1008', '2025-09-01 14:00:00','20253S', 'T41B'),
     ('1010', '2025-09-01 16:00:00', '20253S', 'T41B');
     
-INSERT INTO asistencia (matricula, periodo, clave) VALUES 
+INSERT INTO ASISTENCIA (matricula, periodo, clave) VALUES 
     ('1009','20253S', 'T41B'),
     ('1003', '20253S', 'T41A'),
     ('1007','20253S', 'T41B'); 
